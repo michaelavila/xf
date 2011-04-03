@@ -53,8 +53,13 @@ exit_no_such_cmd() {
     exit 1 # no command to run
 }
 
+show_cmd_version() {
+    echo "CMD v$VERSION_NUMBER"
+}
+
 if [[ -z "$1" ]] # if no arguments were given, print usage
 then
+    show_cmd_version
     usage
     exit 1
 elif [[ $1 = "--help" ]] || [[ $1 = "-h" ]]
@@ -63,7 +68,7 @@ then
     exit 0
 elif [[ $1 = "--version" ]] || [[ $1 = "-v" ]]
 then
-    echo "CMD v$VERSION_NUMBER"
+    show_cmd_version
     exit 0
 elif [[ $1 = "init" ]]
 then
