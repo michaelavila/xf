@@ -11,37 +11,37 @@ INSTALLATION
 
 USAGE
 -----
-Usage: cmd command [args]
+    Usage: cmd command [args]
 
-COMMANDS:
-    --help, -h               
-        Show this message
+    COMMANDS:
+        --help, -h               
+            Show this message
 
-    --version, -v            
-        Show version
+        --version, -v            
+            Show version
 
-    init <path>              
-        Initialize cmd project. Uses current working 
-        directory if no path is given.
+        init <path>              
+            Initialize cmd project. Uses current working 
+            directory if no path is given.
 
-    <commandname>
-        Run the specified command
+        <commandname>
+            Run the specified command
 
-    edit <commandname> [options]       
-        Edit the specified command
-        
-        --use-history, -uh      
-            Appends the tail of ~/.bash_history to the
-            command before editing.
+        edit <commandname> [options]       
+            Edit the specified command
+            
+            --use-history, -uh      
+                Appends the tail of ~/.bash_history to the
+                command before editing.
 
-    rm <commandname>         
-        Remove the specified command
+        rm <commandname>         
+            Remove the specified command
 
-    ls                       
-        List available commands
+        ls                       
+            List available commands
 
-    cmdfiles                 
-        Show location of cmdfiles
+        cmdfiles                 
+            Show location of cmdfiles
 
 QUICK EXAMPLE
 -------------
