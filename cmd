@@ -96,6 +96,13 @@ else
             chmod +x $CMD_FILES/$2
         fi
 
+        # if the tail history flag was set, append the bash
+        # history to the end of the command
+        if [[ $3 = "-h" ]]
+        then
+            tail ~/.bash_history >> $CMD_FILES/$2
+        fi
+
         # the $EDITOR environment variable must be specified 
         if [[ -z "$EDITOR" ]]
         then
