@@ -14,6 +14,7 @@ OPTIONS:
    edit <commandname>    Edit the specified command
    rm <commandname>      Remove the specified command
    ls                    List available commands
+   cmdfiles              Show locatioin of cmdfiles
 EOF
 }
 
@@ -78,6 +79,10 @@ else
     elif [[ $1 = "ls" ]]
     then
         ls $CMD_FILES
+    elif [[ $1 = "cmdfiles" ]]
+    then
+        cd $CMD_FILES
+        pwd
     else
         # if no arguments were given, print usage
         if [[ -z "$1" ]]
