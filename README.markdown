@@ -9,6 +9,11 @@ INSTALLATION
 	$ make install
 	$ cmd --help
 
+GETTING THIS CRAP OFF OF YOUR COMPUTER
+--------------------------------------
+    $ cd /path/to/cmd/source
+    $ make uninstall
+
 USAGE
 -----
     Usage: cmd command [args]
