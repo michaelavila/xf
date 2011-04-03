@@ -1,7 +1,7 @@
 CMD
 ===
 
-Manage and run bash scripts from anywhere in your projects directory structure.
+Manage and run bash scripts from anywhere in your project.
 
 USAGE
 -----
@@ -45,7 +45,3 @@ INSTALLATION
 	$ git clone git://github.com/bytecollective/cmd.git
 	$ cd cmd
 	$ make install
-
-The installation is currently incredibly barbaric (this will be fixed soon):
-
-	cp cmd /usr/bin
