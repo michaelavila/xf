@@ -1,11 +1,15 @@
 CMD
 ===
-
 Manage and run bash scripts from anywhere in your project.
+
+INSTALLATION
+------------
+$ git clone git://github.com/bytecollective/cmd.git
+$ cd cmd
+$ make install
 
 USAGE
 -----
-
 	Usage: cmd options
 
     OPTIONS:
@@ -21,7 +25,6 @@ USAGE
 
 QUICK EXAMPLE
 -------------
-
 	$ cmd init
 	$ ls
 	cmdfiles
@@ -38,10 +41,3 @@ QUICK EXAMPLE
 	Hello
 	From CMD
 	$ cmd rm example
-
-INSTALLATION
-------------
-
-	$ git clone git://github.com/bytecollective/cmd.git
-	$ cd cmd
-	$ make install
