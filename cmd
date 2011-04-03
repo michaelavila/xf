@@ -14,7 +14,7 @@ OPTIONS:
    edit <commandname>    Edit the specified command
    rm <commandname>      Remove the specified command
    ls                    List available commands
-   cmdfiles              Show locatioin of cmdfiles
+   cmdfiles              Show location of cmdfiles
 EOF
 }
 
