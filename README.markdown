@@ -4,9 +4,9 @@ Manage and run bash scripts from anywhere in your project.
 
 INSTALLATION
 ------------
-$ git clone git://github.com/bytecollective/cmd.git
-$ cd cmd
-$ make install
+    $ git clone git://github.com/bytecollective/cmd.git
+	$ cd cmd
+	$ make install
 
 USAGE
 -----
