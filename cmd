@@ -47,15 +47,23 @@ exit_reserved_word() {
     exit 1 # can't create the cmd because the cmdname is a reserved word
 }
 
+exit_no_such_cmd() {
+    echo "ERROR: No such command"
+    exit 1 # no command to run
+}
+
 if [[ $1 = "--help" ]] || [[ $1 = "-h" ]]
 then
     usage
+    exit 0
 elif [[ $1 = "--version" ]] || [[ $1 = "-v" ]]
 then
     echo "CMD v$VERSION_NUMBER"
+    exit 0
 elif [[ $1 = "init" ]]
 then
     mkdir cmdfiles
+    exit 0
 else
     set_cmd_files
     if [[ $1 = "edit" ]]
@@ -86,18 +94,25 @@ else
         fi
 
         $EDITOR $CMD_FILES/$2
+        exit 0
     elif [[ $1 = "rm" ]]
     then
         # a commandname must be given
         if [[ -z "$2" ]] ; then exit_no_cmd_specified ; fi
+        # check if command exists
+        if [[ ! -a $CMD_FILES/$2 ]] ; then exit_no_such_cmd ; fi
+
         rm $CMD_FILES/$2
+        exit 0
     elif [[ $1 = "ls" ]]
     then
         ls $CMD_FILES
+        exit 0
     elif [[ $1 = "cmdfiles" ]]
     then
         cd $CMD_FILES
         pwd
+        exit 0
     else
         # if no arguments were given, print usage
         if [[ -z "$1" ]]
@@ -107,15 +122,10 @@ else
         fi
 
         # check if command exists
-        if [[ ! -a $CMD_FILES/$1 ]]
-        then
-            echo "ERROR: No such command"
-            exit 1 # no command to run
-        fi
+        if [[ ! -a $CMD_FILES/$1 ]] ; then exit_no_such_cmd ; fi
 
         # run command
         bash $CMD_FILES/$1
+        exit 0
     fi
 fi
-
-exit 0
