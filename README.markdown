@@ -7,6 +7,7 @@ INSTALLATION
     $ git clone git://github.com/bytecollective/cmd.git
 	$ cd cmd
 	$ make install
+	$ cmd --help
 
 USAGE
 -----
