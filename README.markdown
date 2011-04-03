@@ -28,7 +28,7 @@ QUICK EXAMPLE
 	$ cmd edit example
 	echo "Hello"
 	echo "From CMD!"
-	$ cmd mkdir subdir
+	$ mkdir subdir
 	$ cd subdir
 	$ cmd ls
 	example
