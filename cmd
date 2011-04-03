@@ -1,6 +1,7 @@
 #!/bin/bash
 
 VERSION_NUMBER=0.0.1
+declare -a RESERVED_WORDS=('--help' '-h' '--version' '-v' 'init' 'edit' 'rm' 'ls' 'cmdfiles')
 
 usage() {
 cat << EOF
@@ -41,6 +42,11 @@ exit_no_cmd_specified() {
     exit 1 # can't rm a file that isn't specified
 }
 
+exit_reserved_word() {
+    echo "ERROR: '$1' is a reserved word and cannot be used as a cmd name"
+    exit 1 # can't create the cmd because the cmdname is a reserved word
+}
+
 if [[ $1 = "init" ]]
 then
     mkdir cmdfiles
@@ -56,6 +62,15 @@ else
     then
         # a commandname must be given
         if [[ -z "$2" ]] ; then exit_no_cmd_specified ; fi
+
+        # command name can not be a reserved name
+        for reserved_word in ${RESERVED_WORDS[@]}
+        do
+            if [[ $reserved_word = $2 ]]
+            then
+                exit_reserved_word $2
+            fi
+        done
 
         # if the command doesn't exist create it
         if [[ ! -a $CMD_FILES/$2 ]]
