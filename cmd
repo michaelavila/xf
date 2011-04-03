@@ -2,6 +2,7 @@
 
 VERSION_NUMBER=0.0.1
 declare -a RESERVED_WORDS=('--help' '-h' '--version' '-v' 'init' 'edit' 'rm' 'ls' 'cmdfiles')
+CMD_FILES=.
 
 usage() {
 cat << EOF
@@ -18,8 +19,6 @@ OPTIONS:
    cmdfiles              Show location of cmdfiles
 EOF
 }
-
-CMD_FILES=.
 
 set_cmd_files() {
     while [[ ! -a cmdfiles ]]
