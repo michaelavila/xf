@@ -29,7 +29,7 @@ set_cmd_files() {
         if [[ -a dev/null ]]
         then
             echo "ERROR: No cmdfiles found"
-            exit 0 # no cmd files found
+            exit 1 # no cmd files found
         fi
     done
     CMD_FILES=./cmdfiles
@@ -38,7 +38,7 @@ set_cmd_files() {
 exit_no_cmd_specified() {
     echo "ERROR: No command name specified"
     usage
-    exit 0 # can't rm a file that isn't specified
+    exit 1 # can't rm a file that isn't specified
 }
 
 if [[ $1 = "init" ]]
@@ -67,7 +67,7 @@ else
         if [[ -z "$EDITOR" ]]
         then
             echo "ERROR: Set the \$EDITOR environment variable to your preferred text editor"
-            exit 0 # can't edit the cmd
+            exit 1 # can't edit the cmd
         fi
 
         $EDITOR $CMD_FILES/$2
@@ -88,13 +88,15 @@ else
         if [[ -z "$1" ]]
         then
             usage
-            exit 0
+            exit 1
         fi
         if [[ ! -a $CMD_FILES/$1 ]]
         then
             echo "ERROR: No such command"
-            exit 0 # no command to run
+            exit 1 # no command to run
         fi
         bash $CMD_FILES/$1
     fi
 fi
+
+exit 0
