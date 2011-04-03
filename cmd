@@ -1,24 +1,42 @@
 #!/bin/bash
 
 VERSION_NUMBER=0.0.1
-declare -a RESERVED_WORDS=('--help' '-h' '--version' '-v' 'init' 'edit' 'rm' 'ls' 'cmdfiles')
+declare -a RESERVED_WORDS=('--help' '-h' '--version' '-v' 'init' 'edit' 'rm' 'ls' 'cmdfiles' '--use-history' '-uh')
 CMD_FILES=.
 
 usage() {
 cat << EOF
 Usage: $0 command [args]
 
-OPTIONS:
-   --help, -h            Show this message
-   --version, -v         Show version
-   init <path>           Initialize cmd project.
-                         Uses current working directory
-                         if no path is given.
-   <commandname>         Run the specified command
-   edit <commandname>    Edit the specified command
-   rm <commandname>      Remove the specified command
-   ls                    List available commands
-   cmdfiles              Show location of cmdfiles
+COMMANDS:
+    --help, -h               
+        Show this message
+
+    --version, -v            
+        Show version
+
+    init <path>              
+        Initialize cmd project. Uses current working 
+        directory if no path is given.
+
+    <commandname>
+        Run the specified command
+
+    edit <commandname> [options]       
+        Edit the specified command
+        
+        --use-history, -uh      
+            Appends the tail of ~/.bash_history to the
+            command before editing.
+
+    rm <commandname>         
+        Remove the specified command
+
+    ls                       
+        List available commands
+
+    cmdfiles                 
+        Show location of cmdfiles
 EOF
 }
 
@@ -114,7 +132,7 @@ else
 
         # if the tail history flag was set, append the bash
         # history to the end of the command
-        if [[ $3 = "-h" ]]
+        if [[ $3 = "--use-history" ]] || [[ $3 = "-uh" ]]
         then
             tail ~/.bash_history >> $CMD_FILES/$2
         fi
