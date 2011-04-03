@@ -53,7 +53,11 @@ exit_no_such_cmd() {
     exit 1 # no command to run
 }
 
-if [[ $1 = "--help" ]] || [[ $1 = "-h" ]]
+if [[ -z "$1" ]] # if no arguments were given, print usage
+then
+    usage
+    exit 1
+elif [[ $1 = "--help" ]] || [[ $1 = "-h" ]]
 then
     usage
     exit 0
@@ -131,13 +135,6 @@ else
         pwd
         exit 0
     else
-        # if no arguments were given, print usage
-        if [[ -z "$1" ]]
-        then
-            usage
-            exit 1
-        fi
-
         # check if command exists
         if [[ ! -a $CMD_FILES/$1 ]] ; then exit_no_such_cmd ; fi
 
