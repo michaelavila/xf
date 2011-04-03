@@ -14,6 +14,7 @@ USAGE
    		edit <commandname>    Edit the specified command
    		rm <commandname>      Remove the specified command
    		ls                    List available commands
+	   	cmdfiles              Show locatioin of cmdfiles
 
 
 QUICK EXAMPLE
@@ -22,6 +23,8 @@ QUICK EXAMPLE
 	$ cmd init
 	$ ls
 	cmdfiles
+	$ cmd cmdfiles
+	/projects/cmd_example/cmdfiles
 	$ cmd edit example
 	echo "Hello"
 	echo "From CMD!"
