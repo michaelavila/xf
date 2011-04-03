@@ -6,12 +6,14 @@ CMD_FILES=.
 
 usage() {
 cat << EOF
-Usage: $0 options
+Usage: $0 command [args]
 
 OPTIONS:
    --help, -h            Show this message
    --version, -v         Show version
-   init                  Initialize cmd project
+   init <path>           Initialize cmd project.
+                         Uses current working directory
+                         if no path is given.
    <commandname>         Run the specified command
    edit <commandname>    Edit the specified command
    rm <commandname>      Remove the specified command
@@ -61,7 +63,15 @@ then
     exit 0
 elif [[ $1 = "init" ]]
 then
-    mkdir cmdfiles
+    # use specified path if it exists
+    if [[ -z "$2" ]]
+    then 
+        PROJECT_PATH=.
+    else
+        PROJECT_PATH=$2
+    fi
+
+    mkdir $PROJECT_PATH/cmdfiles
     exit 0
 else
     set_cmd_files
