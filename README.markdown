@@ -1,6 +1,6 @@
 CMD
 ===
-Manage and run bash scripts from anywhere in your project.
+Manage and run cli scripts from anywhere in your project.
 
 INSTALLATION
 ------------
