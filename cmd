@@ -83,6 +83,7 @@ else
         if [[ ! -a $CMD_FILES/$2 ]]
         then
             touch $CMD_FILES/$2
+            chmod +x $CMD_FILES/$2
         fi
 
         # the $EDITOR environment variable must be specified 
@@ -124,7 +125,7 @@ else
         if [[ ! -a $CMD_FILES/$1 ]] ; then exit_no_such_cmd ; fi
 
         # run command
-        bash $CMD_FILES/$1
+        $CMD_FILES/$1
         exit 0
     fi
 fi
