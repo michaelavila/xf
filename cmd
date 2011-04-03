@@ -47,15 +47,15 @@ exit_reserved_word() {
     exit 1 # can't create the cmd because the cmdname is a reserved word
 }
 
-if [[ $1 = "init" ]]
-then
-    mkdir cmdfiles
-elif [[ $1 = "--help" ]] || [[ $1 = "-h" ]]
+if [[ $1 = "--help" ]] || [[ $1 = "-h" ]]
 then
     usage
 elif [[ $1 = "--version" ]] || [[ $1 = "-v" ]]
 then
     echo "CMD v$VERSION_NUMBER"
+elif [[ $1 = "init" ]]
+then
+    mkdir cmdfiles
 else
     set_cmd_files
     if [[ $1 = "edit" ]]
@@ -105,11 +105,15 @@ else
             usage
             exit 1
         fi
+
+        # check if command exists
         if [[ ! -a $CMD_FILES/$1 ]]
         then
             echo "ERROR: No such command"
             exit 1 # no command to run
         fi
+
+        # run command
         bash $CMD_FILES/$1
     fi
 fi
