@@ -143,6 +143,7 @@ else
     then
         # a commandname must be given
         if [[ -z "$2" ]] ; then exit_no_cmd_specified ; fi
+
         # check if command exists
         if [[ ! -a $CMD_FILES/$2 ]] ; then exit_no_such_cmd ; fi
 
