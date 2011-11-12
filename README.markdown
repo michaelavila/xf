@@ -29,24 +29,24 @@ USAGE
             Initialize xf project. Uses current working 
             directory if no path is given.
 
-        <commandname>
+        <command>
             Run the specified command
 
-        edit <commandname> [options]       
+        edit <command> [options]       
             Edit the specified command
             
             --use-history, -uh      
                 Appends the tail of ~/.bash_history to the
                 command before editing.
 
-        rm <commandname>         
+        rm <command>         
             Remove the specified command
 
         ls                       
             List available commands
 
-        xffiles                 
-            Show location of xffiles
+        xfiles                 
+            Show location of .xfiles
 
 QUICK EXAMPLE
 -------------
