@@ -1,6 +1,6 @@
 xf
 ===
-Manage and run cli scripts from anywhere in your project.
+Manage and run eXecutable Files from anywhere in your project.
 
 INSTALLATION
 ------------
