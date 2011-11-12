@@ -1,22 +1,22 @@
-CMD
+xf
 ===
 Manage and run cli scripts from anywhere in your project.
 
 INSTALLATION
 ------------
-    $ git clone git://github.com/bytecollective/cmd.git
-	$ cd cmd
+    $ git clone git://github.com/bytecollective/xf.git
+	$ cd xf
 	$ make install
-	$ cmd --help
+	$ xf --help
 
 GETTING THIS CRAP OFF OF YOUR COMPUTER
 --------------------------------------
-    $ cd /path/to/cmd/source
+    $ cd /path/to/xf/source
     $ make uninstall
 
 USAGE
 -----
-    Usage: cmd command [args]
+    Usage: xf command [args]
 
     COMMANDS:
         --help, -h               
@@ -26,7 +26,7 @@ USAGE
             Show version
 
         init <path>              
-            Initialize cmd project. Uses current working 
+            Initialize xf project. Uses current working 
             directory if no path is given.
 
         <commandname>
@@ -45,24 +45,24 @@ USAGE
         ls                       
             List available commands
 
-        cmdfiles                 
-            Show location of cmdfiles
+        xffiles                 
+            Show location of xffiles
 
 QUICK EXAMPLE
 -------------
-	$ cmd init
+	$ xf init
 	$ ls
-	cmdfiles
-	$ cmd cmdfiles
-	/projects/cmd_example/cmdfiles
-	$ cmd edit example
+	xffiles
+	$ xf xffiles
+	/projects/xf_example/xffiles
+	$ xf edit example
 	echo "Hello"
-	echo "From CMD!"
+	echo "From xf!"
 	$ mkdir subdir
 	$ cd subdir
-	$ cmd ls
+	$ xf ls
 	example
-	$ cmd example
+	$ xf example
 	Hello
-	From CMD
-	$ cmd rm example
+	From xf
+	$ xf rm example
