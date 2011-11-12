@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION_NUMBER=0.1.0
+VERSION_NUMBER=0.2.0
 declare -a RESERVED_WORDS=('--help' '-h' '--version' '-v' 'init' 'edit' 'rm' 'ls' 'xfiles' '--use-history' '-uh')
 CMD_FILES=.
 
