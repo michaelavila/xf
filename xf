@@ -1,12 +1,12 @@
 #!/bin/bash
 
 VERSION_NUMBER=0.1.0
-declare -a RESERVED_WORDS=('--help' '-h' '--version' '-v' 'init' 'edit' 'rm' 'ls' 'cmdfiles' '--use-history' '-uh')
+declare -a RESERVED_WORDS=('--help' '-h' '--version' '-v' 'init' 'edit' 'rm' 'ls' 'xfiles' '--use-history' '-uh')
 CMD_FILES=.
 
 usage() {
 cat << EOF
-Usage: $0 command [args]
+Usage: xf command [args]
 
 COMMANDS:
     --help, -h               
@@ -35,24 +35,24 @@ COMMANDS:
     ls                       
         List available commands
 
-    cmdfiles                 
-        Show location of cmdfiles
+    xfiles                 
+        Show location of .xfiles
 EOF
 }
 
 set_cmd_files() {
-    while [[ ! -a cmdfiles ]]
+    while [[ ! -a .xfiles ]]
     do
         cd ..
         # using dev/null because it always? exists at root
         # need to find a better way of identifying root directory
         if [[ -a dev/null ]]
         then
-            echo "ERROR: No cmdfiles found"
+            echo "ERROR: No .xfiles found"
             exit 1 # no cmd files found
         fi
     done
-    CMD_FILES=./cmdfiles
+    CMD_FILES=./.xfiles
 }
 
 exit_no_cmd_specified() {
@@ -72,7 +72,7 @@ exit_no_such_cmd() {
 }
 
 show_cmd_version() {
-    echo "CMD v$VERSION_NUMBER"
+    echo "xf v$VERSION_NUMBER"
 }
 
 if [[ -z "$1" ]] # if no arguments were given, print usage
@@ -98,7 +98,7 @@ then
         PROJECT_PATH=$2
     fi
 
-    mkdir $PROJECT_PATH/cmdfiles
+    mkdir $PROJECT_PATH/.xfiles
     exit 0
 else
     set_cmd_files
@@ -152,7 +152,7 @@ else
     then
         ls $CMD_FILES
         exit 0
-    elif [[ $1 = "cmdfiles" ]]
+    elif [[ $1 = "xfiles" ]]
     then
         cd $CMD_FILES
         pwd
