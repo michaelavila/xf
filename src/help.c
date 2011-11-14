@@ -8,7 +8,7 @@ const char xf_usage_help[] =
 
 const char xf_commands_help[] = 
     "xf commands:\n"
-    "   version    Show version of xf\n"
+    "   version    Show version\n"
     "   help       Show this message";
 
 void show_usage() {
