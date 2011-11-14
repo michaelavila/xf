@@ -24,13 +24,20 @@ int main(int argc, char *argv[]) {
         show_version();
         return 0;
     }
-    
-    if (!xfiles_exists() && !strcmp(cmd, "init")) {
+
+    // init cmd
+    int found_xfiles = xfiles_exists();
+
+    if (!found_xfiles && !strcmp(cmd, "init")) {
         mkdir(".xfiles", S_IRUSR | S_IWUSR);
         return 0;
     }
 
     // handle commands that require .xfiles
+    if (!found_xfiles) {
+        printf("No .xfiles found\n");
+        return 0;
+    }
 
     return 0;
 }
