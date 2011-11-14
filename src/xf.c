@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
 
     const char *cmd = argv[1];
 
+    // handle command
     if (!strcmp(cmd, "help")) {
         show_usage();
         show_commands();
