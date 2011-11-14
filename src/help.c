@@ -19,6 +19,11 @@ void show_commands() {
     printf("%s\n", xf_commands_help);
 }
 
+void show_help() {
+    show_usage();
+    show_commands();
+}
+
 void show_version() {
     printf("xf %s\n", xf_version);
 }
