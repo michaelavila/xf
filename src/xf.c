@@ -3,29 +3,25 @@
 #include <sys/stat.h>
 #include "help.h"
 
-int does_xfiles_exist();
-
 int main(int argc, char *argv[]) {
     // no command specified, show help
     if (argc == 1) {
-        show_usage();
-        show_commands();
+        show_help();
         return 0;
     } 
 
     const char *cmd = argv[1];
 
-    // handle help and version commands
+    // handle help and version cmd
     if (!strcmp(cmd, "help")) {
-        show_usage();
-        show_commands();
+        show_help();
         return 0;
     } else if (!strcmp(cmd, "version")) {
         show_version();
         return 0;
     }
 
-    // init cmd
+    // handle init cmd
     int found_xfiles = xfiles_exists();
 
     if (!found_xfiles && !strcmp(cmd, "init")) {
@@ -34,6 +30,8 @@ int main(int argc, char *argv[]) {
     }
 
     // handle commands that require .xfiles
+
+    // can't procede if we don't have any xfiles
     if (!found_xfiles) {
         printf("No .xfiles found\n");
         return 0;
