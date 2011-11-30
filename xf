@@ -19,7 +19,7 @@ COMMANDS:
         Initialize cmd project. Uses current working 
         directory if no path is given.
 
-    <commandname>
+    <commandname> [options]
         Run the specified command
 
     edit <commandname> [options]       

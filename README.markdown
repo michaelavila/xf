@@ -29,7 +29,7 @@ USAGE
             Initialize xf project. Uses current working 
             directory if no path is given.
 
-        <command>
+        <command> [options]
             Run the specified command
 
         edit <command> [options]       
