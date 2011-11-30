@@ -164,8 +164,8 @@ else
         # check if command exists
         if [[ ! -a $CMD_FILES/$1 ]] ; then exit_no_such_cmd ; fi
 
-        # run command
-        $CMD_FILES/$1
+        # run command with any extra args passed in
+        $CMD_FILES/$1 ${@:2:$#}
         exit 0
     fi
 fi
