@@ -1,15 +1,14 @@
 _xf() {
-    local cur prev opts
+    local cur prev opts cmds
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts="--help --version init edit --use-history rm ls xfiles"
+    cmds=$(ls `xf xfiles`)
+    opts="--help --version init edit --use-history rm ls xfiles ${cmds}"
 
     COMPREPLY=()
 
-    if [[ ${cur} == * ]] ; then
-        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-        return 0
-    fi
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
 }
 
 complete -F _xf xf
