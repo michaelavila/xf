@@ -166,6 +166,6 @@ else
 
         # run command with any extra args passed in
         $CMD_FILES/$1 ${@:2:$#}
-        exit 0
+        exit $?
     fi
 fi
