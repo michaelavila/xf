@@ -43,7 +43,7 @@ USAGE
         edit <command> [options]       
             Edit the specified command
             
-            --use-historyy
+            --use-history
                 Appends the tail of ~/.bash_history to the
                 command before editing.
 
