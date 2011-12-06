@@ -64,27 +64,29 @@ your project repository.
 
 	$ xf init
 
-xf init creates a hidden directory named .xfiles that contains all of the executable files.
+xf init creates a hidden directory named .xfiles that contains all of the project's
+executable files.
 
 	$ ls -la
 	.xfiles
 
-**xfiles** shows the path to the .xfiles directory that would be used by a subsequent call to xf.
+**xfiles** shows the path to the current .xfiles directory.
 
 	$ xf xfiles
 	/projects/xf_example/.xfiles
 
-**edit** opens up the specified command in the editor specified by the environment variable $EDITOR.
-If the command does not exist it will be created. Edit is used to create new commands as well as edit
-old ones. Pass in the --use-history flag and xf will append the tail of ~/.bash\_history to your command.
+**edit** opens up the command in the editor specified by the environment variable $EDITOR.
+If the command does not exist it will be created. Use edit to create new commands in
+addition to editing existing ones. Use the --use-history flag to have xf append the tail
+of ~/.bash\_history to your command file.
 
 	$ xf edit example
 	echo "Hello"
 	echo "From xf!"
 
-xf will climb down the directory tree until it finds the root (which it identifies using a test for
-dev/null) or an .xfiles directory. This behavior allows for xf commands to be executed from anywhere
-within the project (below the .xfiles directory.)
+xf will move down the directory tree until it finds the root (which it identifies using a test for
+dev/null) or a .xfiles directory. This behavior allows for xf commands to be executed from anywhere
+within the project (above the .xfiles directory.)
 
 	$ mkdir subdir
 	$ cd subdir
@@ -92,7 +94,7 @@ within the project (below the .xfiles directory.)
 	Hello
 	From xf
 
-**ls** lists all the available commands. A file exists in the .xfiles directory for each command listed
+**ls** lists all of the available commands. A file exists in the .xfiles directory for each command listed
 by ls.
 
 	$ xf ls
