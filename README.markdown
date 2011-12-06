@@ -1,6 +1,14 @@
 xf
 ===
-Manage and run eXecutable Files from anywhere in your project.
+eXecutable Files (xf) was created to make it easier for software development teams
+to write, run, and share commands and scripts specific to their individual projects.
+Many commands are written and executed over the course of a development project. We have
+scripts to build, test, deploy, analyze, the list goes on. These scripts are written in
+different languages, use different platforms, and for the most part have very little
+in common. Managing all of this is prone to error.
+
+xf helps by giving one place to go to manage these commands and scripts and allows them
+to be accessed from anywhere within the project.
 
 INSTALLATION
 ------------
@@ -29,13 +37,13 @@ USAGE
             Initialize xf project. Uses current working 
             directory if no path is given.
 
-        <command> [options]
+        <command> options
             Run the specified command
 
         edit <command> [options]       
             Edit the specified command
             
-            --use-history, -uh      
+            --use-historyy
                 Appends the tail of ~/.bash_history to the
                 command before editing.
 
@@ -48,21 +56,48 @@ USAGE
         xfiles                 
             Show location of .xfiles
 
-QUICK EXAMPLE
--------------
+QUICK REFERENCE
+---------------
+
+**init** is used to create a new xfiles project. This is typically done at the root of
+your project repository.
+
 	$ xf init
-	$ ls
-	xffiles
-	$ xf xffiles
-	/projects/xf_example/xffiles
+
+xf init creates a hidden directory named .xfiles that contains all of the executable files.
+
+	$ ls -la
+	.xfiles
+
+**xfiles** shows the path to the .xfiles directory that would be used by a subsequent call to xf.
+
+	$ xf xfiles
+	/projects/xf_example/.xfiles
+
+**edit** opens up the specified command in the editor specified by the environment variable $EDITOR.
+If the command does not exist it will be created. Edit is used to create new commands as well as edit
+old ones. Pass in the --use-history flag and xf will append the tail of ~/.bash\_history to your command.
+
 	$ xf edit example
 	echo "Hello"
 	echo "From xf!"
+
+xf will climb down the directory tree until it finds the root (which it identifies using a test for
+dev/null) or an .xfiles directory. This behavior allows for xf commands to be executed from anywhere
+within the project (below the .xfiles directory.)
+
 	$ mkdir subdir
 	$ cd subdir
-	$ xf ls
-	example
 	$ xf example
 	Hello
 	From xf
+
+**ls** lists all the available commands. A file exists in the .xfiles directory for each command listed
+by ls.
+
+	$ xf ls
+	example
+
+**rm** permanently removes a command.
+
 	$ xf rm example
