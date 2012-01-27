@@ -32,6 +32,9 @@ COMMANDS:
     rm <commandname>         
         Remove the specified command
 
+    show <commandname>
+        Show the contents of the specified command
+
     ls                       
         List available commands
 
@@ -102,6 +105,7 @@ then
 
     mkdir $PROJECT_PATH/.xfiles
     exit 0
+            
 else
     set_cmd_files
     if [[ $1 = "edit" ]]
@@ -159,6 +163,16 @@ else
     then
         cd $CMD_FILES
         pwd
+        exit 0
+    elif [[ $1 = "show" ]]
+    then
+        # a commandname must be given
+        if [[ -z "$2" ]] ; then exit_no_cmd_specified ; fi
+
+        # check if command exists
+        if [[ ! -a $CMD_FILES/$2 ]] ; then exit_no_such_cmd ; fi
+
+        cat $CMD_FILES/$2
         exit 0
     else
         # check if command exists
