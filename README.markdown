@@ -50,6 +50,9 @@ USAGE
         rm <command>         
             Remove the specified command
 
+        show <commandname>
+            Show the contents of the specified command
+
         ls                       
             List available commands
 
