@@ -11,10 +11,10 @@ xf helps you to find and execute these scripts from anywhere within the project.
 
 INSTALLATION
 ------------
-  $ git clone git://github.com/bytecollective/xf.git
-	$ cd xf
-	$ make install
-	$ xf --help
+    $ git clone git://github.com/bytecollective/xf.git
+    $ cd xf
+    $ make install
+    $ xf --help
 
 GETTING THIS CRAP OFF OF YOUR COMPUTER
 --------------------------------------
