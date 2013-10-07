@@ -11,6 +11,7 @@ xf helps you to find and execute these scripts from anywhere within the project.
 
 INSTALLATION
 ------------
+
     $ git clone git://github.com/bytecollective/xf.git
     $ cd xf
     $ make install
@@ -18,6 +19,7 @@ INSTALLATION
 
 GETTING THIS CRAP OFF OF YOUR COMPUTER
 --------------------------------------
+
     $ cd /path/to/xf/source
     $ make uninstall
 
@@ -48,18 +50,18 @@ QUICK REFERENCE
 **init** is used to create a new xfiles project. This is typically done at the root of
 your project repository.
 
-	$ xf init
+    $ xf init
 
 xf init creates a hidden file named .xf
 
 **ls** lists all of the available commands. All executable files within the
 whole project will be listed.
 
-	$ xf ls
-	example
+    $ xf ls
+    example
 
 **command** executes the command. If multiple commands with the provided name
 exist then the user is prompted to select which one to run.
 
-  $ xf foo
-  ...
+    $ xf foo
+    ...
