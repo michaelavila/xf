@@ -1,185 +1,114 @@
 #!/bin/bash
 
-VERSION_NUMBER=0.2.0
-declare -a RESERVED_WORDS=('--help' '-h' '--version' '-v' 'init' 'edit' 'rm' 'ls' 'xfiles' '--use-history' '-uh')
-CMD_FILES=.
+VERSION_NUMBER=1.0.0
 
 usage() {
 cat << EOF
-Usage: xf command [args]
+Usage: xf
 
 COMMANDS:
-    --help, -h               
-        Show this message
+  --help, -h               
+    Show this message
 
-    --version, -v            
-        Show version
+  --version, -v            
+    Show version
 
-    init <path>              
-        Initialize cmd project. Uses current working 
-        directory if no path is given.
+  init <path>              
+    Initialize cmd project. Uses current working 
+    directory if no path is given.
 
-    <commandname> [options]
-        Run the specified command
+  ls                       
+    List available commands
 
-    edit <commandname> [options]       
-        Edit the specified command
-        
-        --use-history, -uh      
-            Appends the tail of ~/.bash_history to the
-            command before editing.
-
-    rm <commandname>         
-        Remove the specified command
-
-    show <commandname>
-        Show the contents of the specified command
-
-    ls                       
-        List available commands
-
-    xfiles                 
-        Show location of .xfiles
+  <command> [options]
+    Run the specified command
 EOF
 }
 
-set_cmd_files() {
-    while [[ ! -a .xfiles ]]
-    do
-        cd ..
-        # using dev/null because it always? exists at root
-        # need to find a better way of identifying root directory
-        if [[ -a dev/null ]]
-        then
-            echo "ERROR: No .xfiles found"
-            exit 1 # no cmd files found
-        fi
-    done
-    CMD_FILES=./.xfiles
+show_cmd_version() {
+  echo "xf v$VERSION_NUMBER"
 }
 
-exit_no_cmd_specified() {
-    echo "ERROR: No command name specified"
-    usage
-    exit 1 # can't rm a file that isn't specified
+find_project_root() {
+  while [[ ! -a .xf ]]
+  do
+    cd ..
+    # using dev/null because it always? exists at root
+    # need to find a better way of identifying root directory
+    if [[ -a dev/null ]]
+    then
+      echo "ERROR: No .xf file found"
+      exit 1 # no cmd files found
+    fi
+  done
+  PROJECT_PATH=.
 }
 
-exit_reserved_word() {
-    echo "ERROR: '$1' is a reserved word and cannot be used as a cmd name"
-    exit 1 # can't create the cmd because the cmdname is a reserved word
+list_all_commands() {
+  find $PROJECT_PATH -perm +111 -type f -not -path "*.git*"
+}
+
+find_command() {
+  list_all_commands | grep $1$
+}
+
+select_command() {
+  echo "Multiple matches found:"
+  echo $1 | tr ' ' '\n' > /tmp/xfcommands
+  cat -n /tmp/xfcommands
+  echo "Enter the command you want to execute:"
+  read command_number
+  command=$(sed -n "$command_number p" < /tmp/xfcommands)
 }
 
 exit_no_such_cmd() {
-    echo "ERROR: No such command"
-    exit 1 # no command to run
+  echo "ERROR: No such command"
+  exit 1 # no command to run
 }
-
-show_cmd_version() {
-    echo "xf v$VERSION_NUMBER"
-}
-
-# handle options
 
 if [[ -z "$1" ]] # if no arguments were given, print usage
 then
-    show_cmd_version
-    usage
-    exit 1
+  show_cmd_version
+  usage
+  exit 1
 elif [[ $1 = "--help" ]] || [[ $1 = "-h" ]]
 then
-    usage
-    exit 0
+  usage
+  exit 0
 elif [[ $1 = "--version" ]] || [[ $1 = "-v" ]]
 then
-    show_cmd_version
-    exit 0
+  show_cmd_version
+  exit 0
 elif [[ $1 = "init" ]]
 then
-    # use specified path if it exists
-    if [[ -z "$2" ]]
-    then 
-        PROJECT_PATH=.
-    else
-        PROJECT_PATH=$2
-    fi
+  # use specified path if it exists
+  if [[ -z "$2" ]]
+  then 
+    PROJECT_PATH=.
+  else
+    PROJECT_PATH=$2
+  fi
 
-    mkdir $PROJECT_PATH/.xfiles
-    exit 0
-            
+  touch $PROJECT_PATH/.xf
+  exit 0
 else
-    set_cmd_files
-    if [[ $1 = "edit" ]]
+  find_project_root
+
+  if [[ $1 = "ls" ]]
+  then
+    list_all_commands
+  else
+    command=$(find_command $1)
+    count=`echo $command | wc -w`
+    if [[ $count -eq 0 ]]
     then
-        # a commandname must be given
-        if [[ -z "$2" ]] ; then exit_no_cmd_specified ; fi
-
-        # command name can not be a reserved name
-        for reserved_word in ${RESERVED_WORDS[@]}
-        do
-            if [[ $reserved_word = $2 ]]
-            then
-                exit_reserved_word $2
-            fi
-        done
-
-        # the $EDITOR environment variable must be specified 
-        if [[ -z "$EDITOR" ]]
-        then
-            echo "ERROR: Set the \$EDITOR environment variable to your preferred text editor"
-            exit 1 # can't edit the cmd
-        fi
-
-        # if the command doesn't exist create it
-        if [[ ! -a $CMD_FILES/$2 ]]
-        then
-            touch $CMD_FILES/$2
-            chmod +x $CMD_FILES/$2
-        fi
-
-        # if the tail history flag was set, append the bash
-        # history to the end of the command
-        if [[ $3 = "--use-history" ]] || [[ $3 = "-uh" ]]
-        then
-            tail ~/.bash_history >> $CMD_FILES/$2
-        fi
-
-        $EDITOR $CMD_FILES/$2
-        exit 0
-    elif [[ $1 = "rm" ]]
+      exit_no_such_cmd
+    elif [[ $count -ne 1 ]]
     then
-        # a commandname must be given
-        if [[ -z "$2" ]] ; then exit_no_cmd_specified ; fi
-
-        # check if command exists
-        if [[ ! -a $CMD_FILES/$2 ]] ; then exit_no_such_cmd ; fi
-
-        rm $CMD_FILES/$2
-        exit 0
-    elif [[ $1 = "ls" ]]
-    then
-        ls $CMD_FILES
-        exit 0
-    elif [[ $1 = "xfiles" ]]
-    then
-        cd $CMD_FILES
-        pwd
-        exit 0
-    elif [[ $1 = "show" ]]
-    then
-        # a commandname must be given
-        if [[ -z "$2" ]] ; then exit_no_cmd_specified ; fi
-
-        # check if command exists
-        if [[ ! -a $CMD_FILES/$2 ]] ; then exit_no_such_cmd ; fi
-
-        cat $CMD_FILES/$2
-        exit 0
-    else
-        # check if command exists
-        if [[ ! -a $CMD_FILES/$1 ]] ; then exit_no_such_cmd ; fi
-
-        # run command with any extra args passed in
-        $CMD_FILES/$1 ${@:2:$#}
-        exit $?
+      select_command "$command"
     fi
+
+    $command ${@:2:$#}
+    exit $?
+  fi
 fi
