@@ -9,20 +9,6 @@ in common. Managing all of this is prone to error.
 
 xf helps you to find and execute these scripts from anywhere within the project.
 
-INSTALLATION
-------------
-
-    $ git clone git://github.com/bytecollective/xf.git
-    $ cd xf
-    $ make install
-    $ xf --help
-
-GETTING THIS CRAP OFF OF YOUR COMPUTER
---------------------------------------
-
-    $ cd /path/to/xf/source
-    $ make uninstall
-
 USAGE
 -----
     Usage: xf
